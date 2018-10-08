@@ -24,6 +24,7 @@ public class Usuario {
     private StringProperty direccion;
     private StringProperty curp;
     private StringProperty irc;
+  
     
     
     public Usuario (){
@@ -71,7 +72,7 @@ public class Usuario {
         return contrasenia;
     }
 
-    public void setContrasenia(StringProperty contrasenia) {
+    public void setContrasenia(StringProperty contrasenia) { 
         this.contrasenia = contrasenia;
     }
 
