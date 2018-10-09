@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="sysempeno.Controller.FXMLRegistrarPrendaController">
+   <children>
+      <Label layoutX="31.0" layoutY="18.0" text="Numero de piezas:" />
+      <TextField fx:id="txfNumeroPiezas" layoutX="145.0" layoutY="14.0" prefHeight="25.0" prefWidth="157.0" />
+      <Label layoutX="31.0" layoutY="47.0" text="Categoria:" />
+      <ComboBox fx:id="cbbCategoria" layoutX="31.0" layoutY="70.0" prefHeight="25.0" prefWidth="270.0" />
+      <Label layoutX="31.0" layoutY="105.0" text="Subcategoria:" />
+      <ComboBox fx:id="cbbSubcategoria" layoutX="31.0" layoutY="129.0" prefHeight="25.0" prefWidth="270.0" />
+      <Label layoutX="31.0" layoutY="169.0" text="Maximo de refrendos por categoria:" />
+      <TextField fx:id="txfMaxRefrendos" layoutX="31.0" layoutY="193.0" prefHeight="25.0" prefWidth="270.0" />
+      <TextField fx:id="txfMaxPrestamo" layoutX="31.0" layoutY="254.0" prefHeight="25.0" prefWidth="270.0" />
+      <Label layoutX="31.0" layoutY="231.0" text="Maximo de prestamo por categoria:" />
+      <Label layoutX="35.0" layoutY="285.0" text="Descripcion:" />
+      <TextArea fx:id="txaDescripcion" layoutX="30.0" layoutY="302.0" prefHeight="57.0" prefWidth="270.0" />
+      <Label layoutX="29.0" layoutY="366.0" text="Modelo:" />
+      <Label layoutX="28.0" layoutY="414.0" text="Numero de serie:" />
+      <TextField fx:id="txfModelo" layoutX="30.0" layoutY="383.0" prefHeight="25.0" prefWidth="270.0" />
+      <TextField fx:id="txfNumeroSerie" layoutX="30.0" layoutY="431.0" prefHeight="25.0" prefWidth="270.0" />
+      <CheckBox fx:id="chbOro" layoutX="339.0" layoutY="18.0" mnemonicParsing="false" text="Oro" />
+      <CheckBox fx:id="chbGema" layoutX="410.0" layoutY="18.0" mnemonicParsing="false" text="Gema" />
+      <Label layoutX="339.0" layoutY="47.0" text="Peso:" />
+      <TextField fx:id="txfPeso" layoutX="339.0" layoutY="70.0" prefHeight="25.0" prefWidth="270.0" />
+      <TextField fx:id="txfKilataje" layoutX="339.0" layoutY="129.0" prefHeight="25.0" prefWidth="270.0" />
+      <Label layoutX="340.0" layoutY="105.0" text="Kilataje:" />
+      <Label layoutX="339.0" layoutY="167.0" text="Color:" />
+      <Label layoutX="338.0" layoutY="203.0" text="Claridad:" />
+      <Label layoutX="341.0" layoutY="254.0" text="Prestamo:" />
+      <TextField fx:id="txfPrestamo" layoutX="341.0" layoutY="281.0" prefHeight="25.0" prefWidth="270.0" />
+      <TextField fx:id="txfRevisada" layoutX="341.0" layoutY="431.0" prefHeight="25.0" prefWidth="270.0" />
+      <Label layoutX="343.0" layoutY="414.0" text="Revisada por:" />
+      <Label layoutX="340.0" layoutY="366.0" text="Aprobada:" />
+      <TextField fx:id="txfAprobada" layoutX="343.0" layoutY="383.0" prefHeight="25.0" prefWidth="270.0" />
+      <TextField fx:id="txfAvaluo" layoutX="340.0" layoutY="334.0" prefHeight="25.0" prefWidth="270.0" />
+      <Label layoutX="341.0" layoutY="317.0" text="Avaluo:" />
+      <Button fx:id="btnGuardar" layoutX="291.0" layoutY="467.0" mnemonicParsing="false" text="Guardar" />
+      <Button fx:id="btnCancelar" layoutX="14.0" layoutY="467.0" mnemonicParsing="false" text="Cancelar" />
+      <TextField fx:id="txfColor" layoutX="437.0" layoutY="163.0" prefHeight="25.0" prefWidth="176.0" />
+      <TextField fx:id="txfClaridad" layoutX="438.0" layoutY="199.0" prefHeight="25.0" prefWidth="176.0" />
+   </children>
+</AnchorPane>

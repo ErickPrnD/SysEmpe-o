@@ -12,7 +12,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 
 
-
 public class MyBatisUtil {
     public final static String RESOURCE = "mybatis/mybatis.config.xml";
     public final static String ENVIRONMENT = "development";
@@ -24,4 +23,3 @@ public class MyBatisUtil {
         return session; 
     }
 }
-
