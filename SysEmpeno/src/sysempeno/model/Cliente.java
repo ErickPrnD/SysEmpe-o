@@ -13,6 +13,7 @@ import javafx.beans.property.StringProperty;
  * @author Enrique Ceballos Mtz
  */
 public class Cliente {
+    private Integer idCliente;
     private StringProperty nombre;
     private StringProperty apellidoPaterno;
     private StringProperty apellidoMaterno;
@@ -30,9 +31,10 @@ public class Cliente {
     private StringProperty localidad;
     private StringProperty email;
     private StringProperty comentarios;
- //   private StringProperty huella; 
+    private Object huella; 
     
     public Cliente () {
+    this.idCliente = null;
     this.nombre = new SimpleStringProperty();
     this.apellidoPaterno = new SimpleStringProperty();
     this.apellidoMaterno = new SimpleStringProperty();
@@ -47,8 +49,8 @@ public class Cliente {
     this.colonia = new SimpleStringProperty();
     this.curp = new SimpleStringProperty();
     this.codigoPostal = new SimpleStringProperty();
-    this.colonia = new SimpleStringProperty();
-  //  this.huella = new SimpleStringProperty();
+    this.email = new SimpleStringProperty();
+    this.huella = new Object();
     this.comentarios = new SimpleStringProperty();
     this.localidad = new SimpleStringProperty();
     
@@ -56,9 +58,9 @@ public class Cliente {
     
 }
 
- public Cliente (String nombre, String apellidoPaterno, String apellidoMaterno, String sexo, String fechaNacimiento, String rfc, String numeroIdentificacion,String telefono,
-         String calle, String numero,String interior, String colonia, String codigoPostal, String localidad, String email, String comentarios){
-     
+ public Cliente (Integer idCliente,String nombre, String apellidoPaterno, String apellidoMaterno, String sexo, String fechaNacimiento, String rfc, String numeroIdentificacion,String telefono,
+         String calle, String numero,String interior, String colonia, String codigoPostal, String localidad, String email, String comentarios, Object huella){
+   this.idCliente = idCliente;
     this.nombre = new SimpleStringProperty(nombre);
     this.apellidoPaterno = new SimpleStringProperty(apellidoPaterno);
     this.apellidoMaterno = new SimpleStringProperty(apellidoMaterno);
@@ -73,148 +75,181 @@ public class Cliente {
     this.colonia = new SimpleStringProperty(colonia);
     this.curp = new SimpleStringProperty();
     this.codigoPostal = new SimpleStringProperty(codigoPostal);
-    this.colonia = new SimpleStringProperty(colonia);
-  //  this.huella = new SimpleStringProperty();
+    this.email = new SimpleStringProperty(email);
+    this.huella = huella;
     this.comentarios = new SimpleStringProperty(comentarios);
     this.localidad = new SimpleStringProperty(localidad);
+    
     
    
  }
 
-    public StringProperty getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(StringProperty nombre) {
-        this.nombre = nombre;
-    }
-
-    public StringProperty getApellidoPaterno() {
-        return apellidoPaterno;
-    }
-
-    public void setApellidoPaterno(StringProperty apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
-    }
-
-    public StringProperty getApellidoMaterno() {
+  public Integer getidCliente(){
+      return idCliente;
+  }
+  public void setidCliente(Integer idCliente){
+      this.idCliente = idCliente;
+  }
+  public Object getHuella(){
+      return huella;
+  }
+  public void setHuella(Object huella){
+      this.huella=huella;
+  }
+  public StringProperty nombreProperty(){
+      return nombre;
+  }
+  public String getNombre(){
+      return nombre.get();
+  }
+  public void setNombre (String nombre){
+      this.nombre.set(nombre);
+  }
+  public StringProperty apellidoPaternoProperty(){
+      return apellidoPaterno;
+  }
+  public String getApellidoPaterno(){
+      return apellidoPaterno.get();
+  }
+  public void setApellidoPaterno(String apellidoPaterno){
+      this.apellidoPaterno.set(apellidoPaterno);
+  }
+    public StringProperty apellidoMaternoProperty(){
         return apellidoMaterno;
     }
-
-    public void setApellidoMaterno(StringProperty apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
+    public String getApellidoMaterno(){
+        return apellidoMaterno.get();
     }
-
-    public StringProperty getSexo() {
+    public void setApellidoMaterno(String apellidoMaterno){
+        this.apellidoMaterno.set(apellidoMaterno);
+    }
+    public StringProperty sexoProperty(){
         return sexo;
     }
-
-    public void setSexo(StringProperty sexo) {
-        this.sexo = sexo;
+    public String getSexo(){
+        return sexo.get();
     }
-
-    public StringProperty getFechaNacimiento() {
+    public void setSexo (String sexo){
+        this.sexo.set(sexo);
+    }
+    public StringProperty fechaNacimientoProperty(){
         return fechaNacimiento;
     }
-
-    public void setFechaNacimiento(StringProperty fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public String getFechanacimiento(){
+        return fechaNacimiento.get();
     }
-
-    public StringProperty getRfc() {
+    public void setFechaNacimiento(String fechaNacimiento){
+        this.fechaNacimiento.set(fechaNacimiento);
+    }
+    public StringProperty rfcProperty(){
         return rfc;
     }
-
-    public void setRfc(StringProperty rfc) {
-        this.rfc = rfc;
+    public String getRfc(){
+        return rfc.get();
     }
-
-    public StringProperty getNumeroIdentificacion() {
-        return numeroIdentificacion;
+    public void setRfc(String rfc){
+        this.rfc.set(rfc);
     }
-
-    public void setNumeroIdentificacion(StringProperty numeroIdentificacion) {
-        this.numeroIdentificacion = numeroIdentificacion;
-    }
-
-    public StringProperty getCurp() {
-        return curp;
-    }
-
-    public void setCurp(StringProperty curp) {
-        this.curp = curp;
-    }
-
-    public StringProperty getTelefono() {
+    public StringProperty telefonoProperty(){
         return telefono;
     }
-
-    public void setTelefono(StringProperty telefono) {
-        this.telefono = telefono;
+    public String getTelefono(){
+        return telefono.get();
     }
-
-    public StringProperty getCalle() {
+    public void setTelefono(String telefono){
+        this.telefono.set(telefono);
+    }
+    public StringProperty numeroIdentificacion(){
+        return numeroIdentificacion;
+    }
+    public String getNumeroIdentificacion(){
+        return numeroIdentificacion.get();
+    }
+    public void setNumeroIdentificacion(String numeroIdentificacion){
+        this.numeroIdentificacion.set(numeroIdentificacion);
+    }
+    public StringProperty calleProperty(){
         return calle;
     }
-
-    public void setCalle(StringProperty calle) {
-        this.calle = calle;
+    public String GetCalle(){
+        return calle.get();
     }
-
-    public StringProperty getNumero() {
+    public void setCalle(String calle){
+        this.calle.set(calle);
+    }
+    public StringProperty numeroProperty(){
         return numero;
     }
-
-    public void setNumero(StringProperty numero) {
-        this.numero = numero;
+    public String getNumero(){
+        return numero.get();
     }
-
-    public StringProperty getInterior() {
+    public void setNumero(String numero){
+        this.numero.set(numero);
+    }
+    public StringProperty interiorProperty(){
         return interior;
     }
-
-    public void setInterior(StringProperty interior) {
-        this.interior = interior;
+    public String getInterior(){
+        return interior.get();
     }
-
-    public StringProperty getColonia() {
+    public void setInterior(String interior){
+        this.interior.set(interior);
+    }
+    public StringProperty coloniaProperty(){
         return colonia;
+       
     }
-
-    public void setColonia(StringProperty colonia) {
-        this.colonia = colonia;
+    public String getColonia(){
+        return colonia.get();
     }
-
-    public StringProperty getCodigoPostal() {
-        return codigoPostal;
+    public void setColonia(String colonia){
+        this.colonia.set(colonia);
     }
-
-    public void setCodigoPostal(StringProperty codigoPostal) {
-        this.codigoPostal = codigoPostal;
-    }
-
-    public StringProperty getLocalidad() {
-        return localidad;
-    }
-
-    public void setLocalidad(StringProperty localidad) {
-        this.localidad = localidad;
-    }
-
-    public StringProperty getEmail() {
-        return email;
-    }
-
-    public void setEmail(StringProperty email) {
-        this.email = email;
-    }
-
-    public StringProperty getComentarios() {
-        return comentarios;
-    }
-
-    public void setComentarios(StringProperty comentarios) {
-        this.comentarios = comentarios;
-    }
-    
+ public StringProperty curpProperty(){
+     return curp;
+ }
+ public String getCurp(){
+     return curp.get();
+ }
+ public void setCurp(String curp){
+     this.curp.set(curp);
+      }
+ public StringProperty codigoPostalProperty(){
+     return codigoPostal;
+ }
+ public String getCodigoPostal(){
+     return codigoPostal.get();
+ }
+ public void setCodigoPostal(String codigoPostal){
+     this.codigoPostal.set(codigoPostal);
+ }
+ public StringProperty emailProperty(){
+     return email;
+ }
+ public String getEmail(){
+     return email.get();
+ }
+ public void setEmail (String email){
+     this.email.set(email);
+ }
+ public StringProperty comentariosProperty(){
+     return comentarios;
+ }
+ public String getComentarios(){
+     return comentarios.get();
+ }
+ public void serComentarios(String comentarios){
+     this.comentarios.set(comentarios);
+ }
+ public StringProperty localidadProperty(){
+     return localidad;
+ }
+ public String getLocalidad(){
+     return localidad.get();
+ }
+ public void setLocalidad(String localidad){
+     this.localidad.set(localidad);
+ }
+ 
 }
+

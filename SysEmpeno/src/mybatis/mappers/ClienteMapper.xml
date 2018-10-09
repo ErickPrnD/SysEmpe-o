@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace="IDAO">
+<INSERT id="nuevoCliente" parameterType= "sysempeno.model.Cliente"useGeneratedKeys="true" keyProperty="idCliente" >
+INSERT INTO Cliente (nombre,apellidoPaterno,apellidoMaterno,sexo,fechaNacimiento,rfc,numeroIdentificacion,curp,telefono,calle,numero,interior,colonia,codigopostal,localidad,email,cometarios,huella)   
+    VALUES (#{nombre},#{apellidoPaterno},#{apellidoMaterno}, #{sexo},#{fechaNacimiento},#{rfc},#{numeroIdentificacion},#{curp},#{telefono},#{calle},#{numero},#{interior},#{colina},#{codigoPostal},#{localidad},#{email},#{comentarios}, #{huella}) 
+</INSERT> 
+<UPDATE id = "editarCliente" parameterType = "sysempeno.model.Cliente">
+    UPDATE Cliente SET  nombre = #{nombre}, apellidoPaterno = #{apellidoPaterno}, apellidoMaterno = #{apellidoMaterno},sexo = #{sexo},
+    fechaNacimiento = #{fechaNacimiento},rfc = #{rfc}, numeroIdentificacion =#{numeroIdentificacion}, curp = #{curp},
+    telefono = #{telefono},calle = #{calle}, numero = #{numero}, interior= #{interior},colonia = #{colina},codigoPostal= #{codigoPostal},
+    localidad = #{localidad}, email = #{email}, comentarios = #{comentarios}, huella =  #{huella} 
+    WHERE idCliente= #{idCliente}
+    
+</UPDATE>
+  <SELECT id="obtenerCLIENTE" parameterType= "string" resultType = "sysempeno.model.Cliente">     
+SELECT *FROM Cliente WHERE LOWER (nombre) LIKE LOWER (#{nombre})
+    </SELECT>
+</mapper>
+ 
