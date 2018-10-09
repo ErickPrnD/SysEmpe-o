@@ -6,14 +6,20 @@
 package sysempeno.Controller;
 
 import DAO.UsuarioIDAO;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import sysempeno.SysEmpeno;
 import sysempeno.model.Usuario;
 
 /**
@@ -42,7 +48,7 @@ public class InicioSesionController implements Initializable {
         Usuario usuariotemp = usuarioIDAO.Inicio(probada, contraseniaLogin);
        
         if (usuariotemp != null){
-            System.out.println("ya");
+         clientes();
         } else {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
@@ -50,5 +56,21 @@ public class InicioSesionController implements Initializable {
         alert.show();
     }
         
+        
+    }
+     public static void clientes() {
+        try {
+            FXMLLoader loader = new FXMLLoader(SysEmpeno.class.getResource("view/TablaCliente.fxml"));
+            Parent root = (Parent) loader.load();
+            Scene scene = new Scene(root);
+            SysEmpeno.getStage().hide();
+           SysEmpeno.getStage().setScene(scene);
+            SysEmpeno.getStage().setTitle("Empeños- Administración de clientes");
+           SysEmpeno.getStage().setResizable(true);
+          SysEmpeno.getStage().sizeToScene();
+           SysEmpeno.getStage().show();
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+        }
     }
 }

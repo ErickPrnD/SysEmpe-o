@@ -71,7 +71,7 @@ public class ClienteIDAO implements IclienteIDAO {
             SqlSession conn = MyBatisUtil.getSession();
             try {
                 IclienteIDAO ClienteIDAO = conn.getMapper(IclienteIDAO.class);
-                clienteListo = ClienteIDAO.obtenerCliente(nombre);
+                clienteListo = ClienteIDAO.obtenerCliente("%"+nombre+"%");
             } catch (Exception e) {
                
                 e.printStackTrace();

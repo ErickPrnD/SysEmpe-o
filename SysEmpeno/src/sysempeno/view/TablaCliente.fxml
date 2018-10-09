@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
 
 <AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="sysempeno.Controller.TablaClienteController">
@@ -11,7 +23,121 @@
         <tabs>
           <Tab text="Clientes">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="440.0" prefWidth="654.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="440.0" prefWidth="654.0">
+                     <children>
+                        <SplitPane dividerPositions="0.5240572171651495" orientation="VERTICAL" prefHeight="200.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label prefHeight="5.0" text="Administracion de clientes" />
+                                          <GridPane hgap="10.0" prefHeight="250.0" prefWidth="865.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label text="Nombre:" />
+                                                <Label text="Apellido Paterno:" GridPane.rowIndex="1" />
+                                                <Label text="Apellido Materno:" GridPane.rowIndex="2" />
+                                                <Label text="Sexo" GridPane.rowIndex="3" />
+                                                <Label text="Fecha de Nacimiento:" GridPane.rowIndex="4" />
+                                                <Label text="RFC:" GridPane.rowIndex="5" />
+                                                <Label text="CURP:" GridPane.columnIndex="2" />
+                                                <Label text="Numero Identificacion:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                                <Label text="Calle:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                                <Label text="Numero:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                <Label text="Interior:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                <Label text="Colonia:" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                                <Label text="Email:" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                                <Label text="Comentarios:" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                                <Label text="Codigo Postal:" GridPane.columnIndex="4" />
+                                                <Label text="Localidad:" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                                <Label text="Telefono:" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                                <TextField fx:id="Nombre" GridPane.columnIndex="1" />
+                                                <TextField fx:id="Paterno" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <TextField fx:id="Materno" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <TextField fx:id="sexo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <TextField fx:id="fecha" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <TextField fx:id="rfc" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                <TextField fx:id="curp" GridPane.columnIndex="3" />
+                                                <TextField fx:id="numero" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                <TextField fx:id="calle" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                                <TextField fx:id="NumeroCa" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                                <TextField fx:id="interior" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                                <TextField fx:id="Colonia" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                                <TextField fx:id="postal" GridPane.columnIndex="5" />
+                                                <TextField fx:id="localidad" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                                                <TextField fx:id="telefono" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                                                <TextField fx:id="email" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                                                <TextField fx:id="comentario" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets right="51.0" />
+                                             </VBox.margin>
+                                             <padding>
+                                                <Insets left="15.0" />
+                                             </padding>
+                                          </GridPane>
+                                          <HBox alignment="CENTER" spacing="60.0">
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#guardarCliente" text="Guardar Cambios" />
+                                                <Button mnemonicParsing="false" onAction="#limpiarFormulario" text="Limpiar Formulario" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="277.0" spacing="10.0">
+                                             <children>
+                                                <Label text="Escribe el nombre del cliente:" />
+                                                <TextField fx:id="busqueda" />
+                                                <Button mnemonicParsing="false" onAction="#actualizarClientes" text="Buscar" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets top="50.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="356.0" prefWidth="1198.0">
+                                 <children>
+                                    <TableView fx:id="tablita" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
+                                        <TableColumn fx:id="colPaterno" prefWidth="123.0" text="Apellido Paterno" />
+                                          <TableColumn fx:id="colMaterno" prefWidth="113.0" text="Apellido Materno" />
+                                          <TableColumn fx:id="colCalle" prefWidth="75.0" text="Calle" />
+                                          <TableColumn fx:id="colNumero" prefWidth="75.0" text="Numero" />
+                                          <TableColumn fx:id="colInterior" prefWidth="75.0" text="Interior" />
+                                          <TableColumn fx:id="colLocalidad" prefWidth="75.0" text="Localidad" />
+                                          <TableColumn fx:id="colColonia" prefWidth="75.0" text="Colonia" />
+                                          <TableColumn fx:id="colTelefono" prefWidth="75.0" text="Telefono" />
+                                          <TableColumn fx:id="ColEmail" prefWidth="75.0" text="Email" />
+                                          <TableColumn fx:id="colComentarios" prefWidth="361.0" text="Comentarios" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
             </content>
           </Tab>
           <Tab text="Untitled Tab 2">

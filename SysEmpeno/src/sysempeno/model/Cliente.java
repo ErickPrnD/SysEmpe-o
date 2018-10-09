@@ -18,7 +18,7 @@ public class Cliente {
     private StringProperty apellidoPaterno;
     private StringProperty apellidoMaterno;
     private StringProperty sexo;
-    private StringProperty fechaNacimiento;   //checar esta variable porque el tipo no me cuadra
+    private StringProperty fechaNacimiento; 
     private StringProperty rfc;
     private StringProperty numeroIdentificacion;
     private StringProperty curp;
@@ -135,7 +135,7 @@ public class Cliente {
     public StringProperty fechaNacimientoProperty(){
         return fechaNacimiento;
     }
-    public String getFechanacimiento(){
+    public String getFechaNacimiento(){
         return fechaNacimiento.get();
     }
     public void setFechaNacimiento(String fechaNacimiento){
@@ -171,7 +171,7 @@ public class Cliente {
     public StringProperty calleProperty(){
         return calle;
     }
-    public String GetCalle(){
+    public String getCalle(){
         return calle.get();
     }
     public void setCalle(String calle){
@@ -238,7 +238,7 @@ public class Cliente {
  public String getComentarios(){
      return comentarios.get();
  }
- public void serComentarios(String comentarios){
+ public void setComentarios(String comentarios){
      this.comentarios.set(comentarios);
  }
  public StringProperty localidadProperty(){
