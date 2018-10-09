@@ -5,7 +5,7 @@ package mybatis;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mybatis;
+
 import java.io.IOException;
 import java.io.Reader;
 import org.apache.ibatis.io.Resources;
@@ -21,17 +21,14 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 
 public class MyBatisUtil {
-    public final static String RESOURCE = "mybatis/mybatis-config.xml";
+    public final static String RESOURCE = "mybatis/mybatis.config.xml";
     public final static String ENVIRONMENT = "development";
-    public static SqlSession getSession() {
+    public static SqlSession getSession() throws IOException {
         SqlSession session = null;
-        try {
-            Reader reader = Resources.getResourceAsReader(RESOURCE);
-            SqlSessionFactory sqlMapper = new SqlSessionFactoryBuilder().build(reader, ENVIRONMENT);
-            session = sqlMapper.openSession();
-        } catch (IOException ioEx) {
-            ioEx.printStackTrace();
-        }
-        return session;
+        Reader reader = Resources.getResourceAsReader(RESOURCE);
+        SqlSessionFactory sqlMapper = new SqlSessionFactoryBuilder().build(reader, ENVIRONMENT);
+        session = sqlMapper.openSession();
+        return session; 
     }
 }
+

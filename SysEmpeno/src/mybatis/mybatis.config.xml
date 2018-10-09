@@ -17,6 +17,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         </environment>
     </environments>
     <mappers>
-       
+       <mapper resource="mybatis/mappers/UsuarioMapper.xml"/>
     </mappers>
 </configuration>
