@@ -8,8 +8,8 @@ and open the template in the editor.
 <!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 
 <mapper namespace="IDAO.IusuarioIDAO">
-   <select id="Inicio" parameterType="map" resultType="sysempeno.model.Usuario">
-   SELECT * FROM Usuario WHERE idUsuario = #{idUsuario} AND contrasena = #{contrasena}
-   </select>
+    <select id="Inicio" parameterType="map" resultType="sysempeno.model.Usuario">
+        SELECT * FROM Usuario WHERE idUsuario = #{idUsuario} AND contrasena = #{contrasena}
+    </select>
    
 </mapper>

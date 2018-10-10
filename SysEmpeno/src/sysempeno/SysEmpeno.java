@@ -16,13 +16,13 @@ import javafx.stage.Stage;
  * @author erick
  */
 public class SysEmpeno extends Application {
-    
+    private static Stage stage;
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/sysempeno/view/FXMLRegistrarPrenda.fxml"));
         
         Scene scene = new Scene(root);
-        
+        this.stage = stage;
         stage.setScene(scene);
         stage.show();
     }
@@ -32,6 +32,12 @@ public class SysEmpeno extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        
     }
+    public static Stage getStage(){
+        
+        return stage;
+    }
+
     
 }
