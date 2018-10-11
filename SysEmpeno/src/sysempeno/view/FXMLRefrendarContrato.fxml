@@ -60,32 +60,32 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="0" GridPane.columnIndex="1">
+                  <Label fx:id="lblNumero" text="0" GridPane.columnIndex="1">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label fx:id="lblDiasOrdinarios" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label fx:id="lblDiasExtemporaneos" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Label fx:id="lblDiasFavor" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Label fx:id="lblInteresOrdinario" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label text="0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Label fx:id="lblInteresExtemporaneo" text="0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -101,7 +101,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ListView layoutX="14.0" layoutY="27.0" prefHeight="216.0" prefWidth="294.0" />
+            <ListView fx:id="lsvPrendas" layoutX="14.0" layoutY="27.0" prefHeight="216.0" prefWidth="294.0" />
          </children>
       </Pane>
       <Pane layoutX="320.0" layoutY="210.0" prefHeight="310.0" prefWidth="320.0">
@@ -139,27 +139,27 @@
                   <Label text="Reposicion de contrato $" GridPane.rowIndex="7" />
                   <Label text="IVA $" GridPane.rowIndex="8" />
                   <Label text="Total a pagar $" GridPane.rowIndex="9" />
-                  <TextField GridPane.columnIndex="1" />
-                  <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <TextField fx:id="txfAbono" GridPane.columnIndex="1" />
+                  <CheckBox fx:id="chbReposicion" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="chbEditarImportes" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="txfInteres" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="txxfAlmacenaje" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="txfInteresExtemporaneo" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="txfAlmacenajeExtemporaneo" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="txfReposicion" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField fx:id="txfIVA" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <TextField fx:id="txfTotal" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                </children>
             </GridPane>
             <Label layoutX="8.0" layoutY="27.0" text="Tipo de calculo:" />
-            <RadioButton layoutX="108.0" layoutY="27.0" mnemonicParsing="false" text="Por dia" />
-            <RadioButton layoutX="184.0" layoutY="27.0" mnemonicParsing="false" text="Por periodo" />
+            <RadioButton fx:id="rdbDia" layoutX="108.0" layoutY="27.0" mnemonicParsing="false" text="Por dia" />
+            <RadioButton fx:id="rdbPeriodo" layoutX="184.0" layoutY="27.0" mnemonicParsing="false" text="Por periodo" />
          </children>
       </Pane>
-      <CheckBox layoutX="14.0" layoutY="528.0" mnemonicParsing="false" text="Editar prendas" />
-      <CheckBox layoutX="124.0" layoutY="528.0" mnemonicParsing="false" text="Imp. etiquetas" />
-      <CheckBox layoutX="235.0" layoutY="528.0" mnemonicParsing="false" text="Imp. contratos" />
-      <Button layoutX="354.0" layoutY="524.0" mnemonicParsing="false" text="Guardar" />
-      <Button layoutX="564.0" layoutY="524.0" mnemonicParsing="false" text="Cancelar" />
+      <CheckBox fx:id="chbEditarPrenda" layoutX="14.0" layoutY="528.0" mnemonicParsing="false" text="Editar prendas" />
+      <CheckBox fx:id="chbImpEtiquetas" layoutX="124.0" layoutY="528.0" mnemonicParsing="false" text="Imp. etiquetas" />
+      <CheckBox fx:id="chbImpContrato" layoutX="235.0" layoutY="528.0" mnemonicParsing="false" text="Imp. contratos" />
+      <Button fx:id="btnGuardar" layoutX="354.0" layoutY="524.0" mnemonicParsing="false" text="Guardar" />
+      <Button fx:id="btnCancelar" layoutX="564.0" layoutY="524.0" mnemonicParsing="false" text="Cancelar" />
    </children>
 </AnchorPane>
