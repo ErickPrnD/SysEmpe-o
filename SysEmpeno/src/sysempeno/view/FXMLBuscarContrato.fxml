@@ -1,8 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Controllers.FXMLBuscarContratoController">
-    
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLBuscarContratoController">
+   <children>
+      <Separator layoutX="-1.0" layoutY="40.0" prefHeight="0.0" prefWidth="800.0" />
+      <Label layoutX="14.0" layoutY="14.0" text="Contrato:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txfBusqueda" layoutX="83.0" layoutY="12.0" prefHeight="25.0" prefWidth="125.0" />
+      <Button fx:id="btnNuevoContrato" layoutX="400.0" layoutY="12.0" mnemonicParsing="false" text="Nuevo contrato" />
+      <Label layoutX="12.0" layoutY="43.0" text="No. de contrato" />
+      <Label fx:id="lblNumeroContrato" layoutX="24.0" layoutY="60.0" text="0" textFill="#210194">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="85.0" text="Estatus del empeño" />
+      <TextField fx:id="txfEstatus" layoutX="3.0" layoutY="102.0" prefHeight="25.0" prefWidth="134.0" />
+      <Label layoutX="10.0" layoutY="134.0" text="Prestamo actual:" />
+      <TextField fx:id="txfPrestamo" layoutX="3.0" layoutY="151.0" prefHeight="25.0" prefWidth="134.0" />
+      <Label layoutX="8.0" layoutY="183.0" text="Contrato predecesor" />
+      <TextField fx:id="txfContratoP" layoutX="10.0" layoutY="200.0" prefHeight="25.0" prefWidth="104.0" />
+      <TextField fx:id="txfContratoS" layoutX="132.0" layoutY="200.0" prefHeight="25.0" prefWidth="104.0" />
+      <Label layoutX="132.0" layoutY="183.0" text="Contrato sucesor" />
+      <Label layoutX="7.0" layoutY="227.0" text="Reempeño origen" />
+      <Label layoutX="134.0" layoutY="227.0" text="Reempeño sucesor" />
+      <TextField fx:id="txfReempeñoO" layoutX="7.0" layoutY="244.0" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="txfReempeñoS" layoutX="132.0" layoutY="244.0" prefHeight="25.0" prefWidth="109.0" />
+      <Separator layoutX="7.0" layoutY="275.0" prefHeight="3.0" prefWidth="786.0" />
+      <TabPane layoutY="279.0" prefHeight="227.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Contrato">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="330.0" prefWidth="800.0">
+                     <children>
+                        <Label layoutX="5.0" layoutY="6.0" text="No. Bolsa" />
+                        <Label layoutX="5.0" layoutY="34.0" text="Fecha limite" />
+                        <TextField fx:id="txfNumeroBolsa" layoutX="135.0" layoutY="3.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfFechaLimite" layoutX="135.0" layoutY="31.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfFechaEspera" layoutX="135.0" layoutY="59.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfFechaComercializacion" layoutX="135.0" layoutY="87.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfDesempeño" layoutX="135.0" layoutY="115.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfFotos" layoutX="135.0" layoutY="143.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfPrendas" layoutX="135.0" layoutY="171.0" prefHeight="25.0" prefWidth="109.0" />
+                        <Label layoutX="5.0" layoutY="62.0" text="Fecha de espera" />
+                        <Label layoutX="5.0" layoutY="91.0" text="Fecha comercializacion" />
+                        <Label layoutX="4.0" layoutY="118.0" text="¿Quien desempeño?" />
+                        <Label layoutX="5.0" layoutY="146.0" text="Fotos de prendas" />
+                        <Label layoutX="5.0" layoutY="174.0" text="Prendas disponibles" />
+                        <TextField fx:id="txfAbono" layoutX="400.0" layoutY="3.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfPrestamoOriginal" layoutX="400.0" layoutY="31.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfCotitular" layoutX="400.0" layoutY="58.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfIdCotitular" layoutX="400.0" layoutY="87.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfNombreDesempeño" layoutX="400.0" layoutY="115.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfCaptura" layoutX="400.0" layoutY="143.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfAutoriza" layoutX="400.0" layoutY="170.0" prefHeight="25.0" prefWidth="109.0" />
+                        <Label layoutX="251.0" layoutY="7.0" text="Abono a capital" />
+                        <Label layoutX="251.0" layoutY="34.0" text="Prestamo original" />
+                        <Label layoutX="251.0" layoutY="62.0" text="Cotitular" />
+                        <Label layoutX="251.0" layoutY="91.0" text="Identificacion cotitular" />
+                        <Label layoutX="251.0" layoutY="119.0" text="Nombre quien desempeño" />
+                        <Label layoutX="251.0" layoutY="146.0" text="Usuario captura" />
+                        <Label layoutX="251.0" layoutY="174.0" text="Usuario autorizacion" />
+                        <Label layoutX="518.0" layoutY="7.0" text="Numero de refrendos" />
+                        <Label layoutX="518.0" layoutY="35.0" text="Dias para refrendar" />
+                        <Label layoutX="518.0" layoutY="62.0" text="Dias para desempeñar" />
+                        <Label layoutX="518.0" layoutY="91.0" text="Acumulado PLD cliente" />
+                        <Label layoutX="518.0" layoutY="119.0" text="Identificacion desempeño" />
+                        <Label layoutX="518.0" layoutY="146.0" text="Numero identificacion des" />
+                        <Label layoutX="518.0" layoutY="174.0" text="Comercializado el" />
+                        <TextField fx:id="txfFechaComercializado" layoutX="664.0" layoutY="171.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfNumeroIdDesempeño" layoutX="664.0" layoutY="144.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfIdDesempeño" layoutX="664.0" layoutY="116.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfAcumulado" layoutX="664.0" layoutY="88.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfDesempeñar" layoutX="664.0" layoutY="59.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfDiasRefrendar" layoutX="664.0" layoutY="32.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfNumeroRefrendos" layoutX="664.0" layoutY="4.0" prefHeight="25.0" prefWidth="109.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Prendas">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tbvPrendas" layoutX="14.0" layoutY="14.0" prefHeight="173.0" prefWidth="772.0">
+                          <columns>
+                            <TableColumn fx:id="tbcPrenda" prefWidth="97.0" text="Prenda" />
+                            <TableColumn fx:id="tbcDescripcion" prefWidth="406.0" text="Descripcion" />
+                              <TableColumn fx:id="tbcAvaluo" prefWidth="134.0" text="Avaluo" />
+                              <TableColumn fx:id="tbcPrestamo" prefWidth="134.0" text="Prestamo" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Opciones de pago">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="166.0" layoutY="43.0" text="Cliente" />
+      <TextField fx:id="txfCliente" layoutX="148.0" layoutY="60.0" prefHeight="25.0" prefWidth="192.0" />
+      <Separator layoutX="616.0" layoutY="43.0" orientation="VERTICAL" prefHeight="227.0" prefWidth="0.0" />
+      <TextArea fx:id="txaObservacionesCliente" layoutX="351.0" layoutY="85.0" prefHeight="82.0" prefWidth="258.0" />
+      <Label layoutX="166.0" layoutY="90.0" text="Numero de identificacion" />
+      <TextField fx:id="txfNumeroIdentificacion" layoutX="148.0" layoutY="108.0" prefHeight="25.0" prefWidth="192.0" />
+      <Label layoutX="166.0" layoutY="134.0" text="Direccion" />
+      <TextField fx:id="txfDireccion" layoutX="148.0" layoutY="151.0" prefHeight="25.0" prefWidth="192.0" />
+      <TextArea fx:id="txaObservacionesEmp" layoutX="246.0" layoutY="201.0" prefHeight="72.0" prefWidth="360.0" />
+      <Label layoutX="255.0" layoutY="179.0" text="Observaciones del empeño" />
+      <Button fx:id="btnActualizarObservaciones" layoutX="408.0" layoutY="174.0" mnemonicParsing="false" prefHeight="3.0" prefWidth="147.0" text="Actualizar observaciones" />
+      <Label layoutX="359.0" layoutY="64.0" text="Observaciones del cliente" />
+      <Label layoutX="661.0" layoutY="43.0" text="Lista de prendas" />
+      <ListView fx:id="lsvPrendas" layoutX="626.0" layoutY="67.0" prefHeight="200.0" prefWidth="170.0" />
+      <Button fx:id="btnRefrendar" layoutX="531.0" layoutY="12.0" mnemonicParsing="false" text="Refrendar" />
+      <Button fx:id="btnBuscar" layoutX="215.0" layoutY="12.0" mnemonicParsing="false" text="Buscar" />
+      <Button fx:id="btnFiniquitar" layoutX="609.0" layoutY="12.0" mnemonicParsing="false" text="Finiquitar" />
+      <Button fx:id="btnAumentarEspera" layoutX="684.0" layoutY="12.0" mnemonicParsing="false" text="Aumentar espera" />
+      <Separator layoutX="355.0" layoutY="3.0" orientation="VERTICAL" prefHeight="36.0" prefWidth="9.0" />
+   </children>
 </AnchorPane>
