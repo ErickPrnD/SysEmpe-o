@@ -410,5 +410,9 @@ public class Cliente implements Serializable {
     public String toString() {
         return "Entities.Cliente[ idcliente=" + idcliente + " ]";
     }
+
+    public String getDireccion() {
+        return calle+" #"+numero+" , colonia"+colonia+" C.P."+codigoPostal;
+    }
     
 }

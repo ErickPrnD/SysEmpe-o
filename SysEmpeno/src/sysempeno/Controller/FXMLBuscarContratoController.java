@@ -6,10 +6,13 @@
 package sysempeno.Controller;
 
 import Entities.Contrato;
+import Entities.Prenda;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -153,6 +156,37 @@ public class FXMLBuscarContratoController implements Initializable {
                 lblNumeroContrato.setText(contrato.getIdcontrato().toString());
                 txfCliente.setText(contrato.getClienteIdcliente().toString());
                 txfNumeroIdentificacion.setText(contrato.getClienteIdcliente().getNumeroIdentificacion());
+                //txfPrestamo.setText(contrato.getTotal().toString()); 
+                txfDireccion.setText(contrato.getClienteIdcliente().getDireccion());
+                txfContratoP.setText(contrato.getRefrendoAnterior().getIdcontrato().toString());
+                txfContratoS.setText(contrato.getRefrendoPosterior().getIdcontrato().toString());
+                txfReempeñoO.setText(contrato.getReempeñoAnterior().getIdcontrato().toString());
+                txfReempeñoS.setText(contrato.getReempeñoPosterior().getIdcontrato().toString());
+                txaObservacionesCliente.setText(contrato.getObservacionesCliente());
+                txaObservacionesEmp.setText(contrato.getObservacionesEmpeño());
+                ObservableList<Prenda> listaPrendas=FXCollections.observableArrayList(contrato.getPrendaList());
+                lsvPrendas.setItems(listaPrendas);
+                txfNumeroBolsa.setText(Integer.toString(contrato.getNumBolsa()));
+                txfFechaLimite.setText(contrato.getFechaLimite().toString());
+                txfFechaEspera.setText(contrato.getFechaEspera().toString());
+                txfFechaComercializacion.setText(contrato.getFechaComercializacion().toString());
+                txfDesempeño.setText(contrato.getDesempeña());
+                txfFotos.setText(Integer.toString(contrato.getFotoprendaList().size()));
+                txfPrendas.setText(Integer.toString(contrato.getPrendaList().size()));
+                txfAbono.setText(Double.toString(contrato.getAbono()));
+                //txfPrestamoOriginal.setText(contrato.getTotal().toString());
+                txfCotitular.setText(contrato.getCotitular());
+                txfIdCotitular.setText(contrato.getIdentificacionCotitular());
+                txfNombreDesempeño.setText(contrato.getDesempeña());
+                txfCaptura.setText(contrato.getPrendaList().get(0).getRevisa().toString());
+                txfAutoriza.setText(contrato.getPrendaList().get(0).getAutoriza().toString());
+                //txfNumeroRefrendos.setText(contrato.getNumBolsa());
+                txfDiasRefrendar.setText(Integer.toString(contrato.getDiasRefrendo()));
+                txfDesempeñar.setText(Integer.toString(contrato.getDiasDesempeño()));
+                //txfAcumulado.setText("");
+                txfIdDesempeño.setText(contrato.getIdentificacionDesempeño());
+                txfNumeroIdDesempeño.setText(contrato.getNumIdentificacionDesempeño());
+                txfFechaComercializado.setText(contrato.getFechaComercializacion().toString());
                 
             }
         });
