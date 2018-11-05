@@ -22,27 +22,11 @@ public class PruebasErick extends Application {
     private static Stage stage;
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/sysempeno/view/FXMLRefrendarContrato.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/sysempeno/view/FXMLBuscarContrato.fxml"));
         
         Scene scene = new Scene(root);
         this.stage = stage;
-         MenuBar menuBar = new MenuBar();
- 
-        // --- Menu File
-        Menu menuFile = new Menu("File");
- 
-        // --- Menu Edit
-        Menu menuEdit = new Menu("Edit");
- 
-        // --- Menu View
-        Menu menuView = new Menu("View");
- 
-        menuBar.getMenus().addAll(menuFile, menuEdit, menuView);
- 
- 
-        ((VBox) scene.getRoot()).getChildren().addAll(menuBar);
         stage.setScene(scene);
-        
         stage.show();
     }
 
