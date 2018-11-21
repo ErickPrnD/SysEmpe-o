@@ -10,13 +10,12 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Cliente;
-import Entities.Ocupacion;
+import entities.Cliente;
+import entities.Ocupacion;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
 
@@ -26,8 +25,8 @@ import jpa.exceptions.NonexistentEntityException;
  */
 public class OcupacionJpaController implements Serializable {
 
-    public OcupacionJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("SysEmpenoPU");
+    public OcupacionJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 

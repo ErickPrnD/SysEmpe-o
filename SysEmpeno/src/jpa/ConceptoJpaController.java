@@ -5,15 +5,16 @@
  */
 package jpa;
 
-import Entities.Concepto;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Movimiento;
+import entities.Abono;
+import entities.Concepto;
 import java.util.ArrayList;
 import java.util.List;
+import entities.Movimiento;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -36,6 +37,9 @@ public class ConceptoJpaController implements Serializable {
     }
 
     public void create(Concepto concepto) {
+        if (concepto.getAbonoList() == null) {
+            concepto.setAbonoList(new ArrayList<Abono>());
+        }
         if (concepto.getMovimientoList() == null) {
             concepto.setMovimientoList(new ArrayList<Movimiento>());
         }
@@ -43,6 +47,12 @@ public class ConceptoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<Abono> attachedAbonoList = new ArrayList<Abono>();
+            for (Abono abonoListAbonoToAttach : concepto.getAbonoList()) {
+                abonoListAbonoToAttach = em.getReference(abonoListAbonoToAttach.getClass(), abonoListAbonoToAttach.getIdAbono());
+                attachedAbonoList.add(abonoListAbonoToAttach);
+            }
+            concepto.setAbonoList(attachedAbonoList);
             List<Movimiento> attachedMovimientoList = new ArrayList<Movimiento>();
             for (Movimiento movimientoListMovimientoToAttach : concepto.getMovimientoList()) {
                 movimientoListMovimientoToAttach = em.getReference(movimientoListMovimientoToAttach.getClass(), movimientoListMovimientoToAttach.getIdmovimiento());
@@ -50,6 +60,15 @@ public class ConceptoJpaController implements Serializable {
             }
             concepto.setMovimientoList(attachedMovimientoList);
             em.persist(concepto);
+            for (Abono abonoListAbono : concepto.getAbonoList()) {
+                Concepto oldConceptoIdconceptoOfAbonoListAbono = abonoListAbono.getConceptoIdconcepto();
+                abonoListAbono.setConceptoIdconcepto(concepto);
+                abonoListAbono = em.merge(abonoListAbono);
+                if (oldConceptoIdconceptoOfAbonoListAbono != null) {
+                    oldConceptoIdconceptoOfAbonoListAbono.getAbonoList().remove(abonoListAbono);
+                    oldConceptoIdconceptoOfAbonoListAbono = em.merge(oldConceptoIdconceptoOfAbonoListAbono);
+                }
+            }
             for (Movimiento movimientoListMovimiento : concepto.getMovimientoList()) {
                 Concepto oldConceptoIdconceptoOfMovimientoListMovimiento = movimientoListMovimiento.getConceptoIdconcepto();
                 movimientoListMovimiento.setConceptoIdconcepto(concepto);
@@ -73,9 +92,19 @@ public class ConceptoJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Concepto persistentConcepto = em.find(Concepto.class, concepto.getIdconcepto());
+            List<Abono> abonoListOld = persistentConcepto.getAbonoList();
+            List<Abono> abonoListNew = concepto.getAbonoList();
             List<Movimiento> movimientoListOld = persistentConcepto.getMovimientoList();
             List<Movimiento> movimientoListNew = concepto.getMovimientoList();
             List<String> illegalOrphanMessages = null;
+            for (Abono abonoListOldAbono : abonoListOld) {
+                if (!abonoListNew.contains(abonoListOldAbono)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Abono " + abonoListOldAbono + " since its conceptoIdconcepto field is not nullable.");
+                }
+            }
             for (Movimiento movimientoListOldMovimiento : movimientoListOld) {
                 if (!movimientoListNew.contains(movimientoListOldMovimiento)) {
                     if (illegalOrphanMessages == null) {
@@ -87,6 +116,13 @@ public class ConceptoJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
+            List<Abono> attachedAbonoListNew = new ArrayList<Abono>();
+            for (Abono abonoListNewAbonoToAttach : abonoListNew) {
+                abonoListNewAbonoToAttach = em.getReference(abonoListNewAbonoToAttach.getClass(), abonoListNewAbonoToAttach.getIdAbono());
+                attachedAbonoListNew.add(abonoListNewAbonoToAttach);
+            }
+            abonoListNew = attachedAbonoListNew;
+            concepto.setAbonoList(abonoListNew);
             List<Movimiento> attachedMovimientoListNew = new ArrayList<Movimiento>();
             for (Movimiento movimientoListNewMovimientoToAttach : movimientoListNew) {
                 movimientoListNewMovimientoToAttach = em.getReference(movimientoListNewMovimientoToAttach.getClass(), movimientoListNewMovimientoToAttach.getIdmovimiento());
@@ -95,6 +131,17 @@ public class ConceptoJpaController implements Serializable {
             movimientoListNew = attachedMovimientoListNew;
             concepto.setMovimientoList(movimientoListNew);
             concepto = em.merge(concepto);
+            for (Abono abonoListNewAbono : abonoListNew) {
+                if (!abonoListOld.contains(abonoListNewAbono)) {
+                    Concepto oldConceptoIdconceptoOfAbonoListNewAbono = abonoListNewAbono.getConceptoIdconcepto();
+                    abonoListNewAbono.setConceptoIdconcepto(concepto);
+                    abonoListNewAbono = em.merge(abonoListNewAbono);
+                    if (oldConceptoIdconceptoOfAbonoListNewAbono != null && !oldConceptoIdconceptoOfAbonoListNewAbono.equals(concepto)) {
+                        oldConceptoIdconceptoOfAbonoListNewAbono.getAbonoList().remove(abonoListNewAbono);
+                        oldConceptoIdconceptoOfAbonoListNewAbono = em.merge(oldConceptoIdconceptoOfAbonoListNewAbono);
+                    }
+                }
+            }
             for (Movimiento movimientoListNewMovimiento : movimientoListNew) {
                 if (!movimientoListOld.contains(movimientoListNewMovimiento)) {
                     Concepto oldConceptoIdconceptoOfMovimientoListNewMovimiento = movimientoListNewMovimiento.getConceptoIdconcepto();
@@ -136,6 +183,13 @@ public class ConceptoJpaController implements Serializable {
                 throw new NonexistentEntityException("The concepto with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
+            List<Abono> abonoListOrphanCheck = concepto.getAbonoList();
+            for (Abono abonoListOrphanCheckAbono : abonoListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Concepto (" + concepto + ") cannot be destroyed since the Abono " + abonoListOrphanCheckAbono + " in its abonoList field has a non-nullable conceptoIdconcepto field.");
+            }
             List<Movimiento> movimientoListOrphanCheck = concepto.getMovimientoList();
             for (Movimiento movimientoListOrphanCheckMovimiento : movimientoListOrphanCheck) {
                 if (illegalOrphanMessages == null) {

@@ -142,13 +142,13 @@
                   <TextField fx:id="txfAbono" GridPane.columnIndex="1" />
                   <CheckBox fx:id="chbReposicion" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <CheckBox fx:id="chbEditarImportes" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="txfInteres" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="txxfAlmacenaje" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="txfInteresExtemporaneo" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField fx:id="txfAlmacenajeExtemporaneo" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <TextField fx:id="txfReposicion" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <TextField fx:id="txfIVA" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                  <TextField fx:id="txfTotal" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <TextField fx:id="txfInteres" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="txfAlmacenaje" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="txfInteresExtemporaneo" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="txfAlmacenajeExtemporaneo" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="txfReposicion" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField fx:id="txfIVA" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <TextField fx:id="txfTotal" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                </children>
             </GridPane>
             <Label layoutX="8.0" layoutY="27.0" text="Tipo de calculo:" />

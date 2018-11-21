@@ -70,20 +70,18 @@
                         <Label layoutX="251.0" layoutY="119.0" text="Nombre quien desempeño" />
                         <Label layoutX="251.0" layoutY="146.0" text="Usuario captura" />
                         <Label layoutX="251.0" layoutY="174.0" text="Usuario autorizacion" />
-                        <Label layoutX="518.0" layoutY="7.0" text="Numero de refrendos" />
-                        <Label layoutX="518.0" layoutY="35.0" text="Dias para refrendar" />
-                        <Label layoutX="518.0" layoutY="62.0" text="Dias para desempeñar" />
-                        <Label layoutX="518.0" layoutY="91.0" text="Acumulado PLD cliente" />
-                        <Label layoutX="518.0" layoutY="119.0" text="Identificacion desempeño" />
-                        <Label layoutX="518.0" layoutY="146.0" text="Numero identificacion des" />
-                        <Label layoutX="518.0" layoutY="174.0" text="Comercializado el" />
-                        <TextField fx:id="txfFechaComercializado" editable="false" layoutX="664.0" layoutY="171.0" prefHeight="25.0" prefWidth="109.0" />
-                        <TextField fx:id="txfNumeroIdDesempeño" editable="false" layoutX="664.0" layoutY="144.0" prefHeight="25.0" prefWidth="109.0" />
-                        <TextField fx:id="txfIdDesempeño" editable="false" layoutX="664.0" layoutY="116.0" prefHeight="25.0" prefWidth="109.0" />
-                        <TextField fx:id="txfAcumulado" editable="false" layoutX="664.0" layoutY="88.0" prefHeight="25.0" prefWidth="109.0" />
-                        <TextField fx:id="txfDesempeñar" editable="false" layoutX="664.0" layoutY="59.0" prefHeight="25.0" prefWidth="109.0" />
-                        <TextField fx:id="txfDiasRefrendar" editable="false" layoutX="664.0" layoutY="32.0" prefHeight="25.0" prefWidth="109.0" />
-                        <TextField fx:id="txfNumeroRefrendos" editable="false" layoutX="664.0" layoutY="4.0" prefHeight="25.0" prefWidth="109.0" />
+                        <Label layoutX="518.0" layoutY="21.0" text="Dias para refrendar" />
+                        <Label layoutX="518.0" layoutY="48.0" text="Dias para desempeñar" />
+                        <Label layoutX="518.0" layoutY="77.0" text="Acumulado PLD cliente" />
+                        <Label layoutX="518.0" layoutY="105.0" text="Identificacion desempeño" />
+                        <Label layoutX="518.0" layoutY="132.0" text="Numero identificacion des" />
+                        <Label layoutX="518.0" layoutY="160.0" text="Comercializado el" />
+                        <TextField fx:id="txfFechaComercializado" editable="false" layoutX="664.0" layoutY="157.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfNumeroIdDesempeño" editable="false" layoutX="664.0" layoutY="130.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfIdDesempeño" editable="false" layoutX="664.0" layoutY="102.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfAcumulado" editable="false" layoutX="664.0" layoutY="74.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfDesempeñar" editable="false" layoutX="664.0" layoutY="45.0" prefHeight="25.0" prefWidth="109.0" />
+                        <TextField fx:id="txfDiasRefrendar" editable="false" layoutX="664.0" layoutY="18.0" prefHeight="25.0" prefWidth="109.0" />
                      </children>
                   </AnchorPane>
             </content>

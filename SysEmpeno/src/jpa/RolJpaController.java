@@ -5,18 +5,17 @@
  */
 package jpa;
 
-import Entities.Rol;
+import entities.Rol;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Usuario;
+import entities.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
 
@@ -26,8 +25,8 @@ import jpa.exceptions.NonexistentEntityException;
  */
 public class RolJpaController implements Serializable {
 
-    public RolJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("SysEmpenoPU");
+    public RolJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 

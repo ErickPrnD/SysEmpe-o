@@ -25,6 +25,31 @@
     <class>Entities.Articulo</class>
     <class>Entities.Subcategoria</class>
     <class>Entities.Tipoidentificacion</class>
+    <class>Entities.Abono</class>
+    <class>entities.Contrato</class>
+    <class>entities.Prenda</class>
+    <class>entities.Categoria</class>
+    <class>entities.Fotoprenda</class>
+    <class>entities.Municipio</class>
+    <class>entities.Corte</class>
+    <class>entities.Concepto</class>
+    <class>entities.Venta</class>
+    <class>entities.Usuario</class>
+    <class>entities.Ocupacion</class>
+    <class>entities.Rol</class>
+    <class>entities.Fotocliente</class>
+    <class>entities.Movimiento</class>
+    <class>entities.Institucionemite</class>
+    <class>entities.Estado</class>
+    <class>entities.Articulo</class>
+    <class>entities.Tipoidentificacion</class>
+    <class>entities.Parametros</class>
+    <class>entities.Cliente</class>
+    <class>entities.Subcategoria</class>
+    <class>entities.Mueve</class>
+    <class>entities.Abono</class>
+    <class>entities.Empresa</class>
+    <class>entities.Pais</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sysempenobd?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

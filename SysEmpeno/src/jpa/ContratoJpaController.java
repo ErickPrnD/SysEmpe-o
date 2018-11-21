@@ -10,12 +10,13 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Cliente;
-import Entities.Contrato;
+import entities.Cliente;
+import entities.Contrato;
 import java.util.ArrayList;
 import java.util.List;
-import Entities.Fotoprenda;
-import Entities.Prenda;
+import entities.Abono;
+import entities.Fotoprenda;
+import entities.Prenda;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -50,6 +51,9 @@ public class ContratoJpaController implements Serializable {
         }
         if (contrato.getContratoList3() == null) {
             contrato.setContratoList3(new ArrayList<Contrato>());
+        }
+        if (contrato.getAbonoList() == null) {
+            contrato.setAbonoList(new ArrayList<Abono>());
         }
         if (contrato.getFotoprendaList() == null) {
             contrato.setFotoprendaList(new ArrayList<Fotoprenda>());
@@ -110,6 +114,12 @@ public class ContratoJpaController implements Serializable {
                 attachedContratoList3.add(contratoList3ContratoToAttach);
             }
             contrato.setContratoList3(attachedContratoList3);
+            List<Abono> attachedAbonoList = new ArrayList<Abono>();
+            for (Abono abonoListAbonoToAttach : contrato.getAbonoList()) {
+                abonoListAbonoToAttach = em.getReference(abonoListAbonoToAttach.getClass(), abonoListAbonoToAttach.getIdAbono());
+                attachedAbonoList.add(abonoListAbonoToAttach);
+            }
+            contrato.setAbonoList(attachedAbonoList);
             List<Fotoprenda> attachedFotoprendaList = new ArrayList<Fotoprenda>();
             for (Fotoprenda fotoprendaListFotoprendaToAttach : contrato.getFotoprendaList()) {
                 fotoprendaListFotoprendaToAttach = em.getReference(fotoprendaListFotoprendaToAttach.getClass(), fotoprendaListFotoprendaToAttach.getIdfoto());
@@ -179,6 +189,15 @@ public class ContratoJpaController implements Serializable {
                     oldReempeñoPosteriorOfContratoList3Contrato = em.merge(oldReempeñoPosteriorOfContratoList3Contrato);
                 }
             }
+            for (Abono abonoListAbono : contrato.getAbonoList()) {
+                Contrato oldContratoIdcontratoOfAbonoListAbono = abonoListAbono.getContratoIdcontrato();
+                abonoListAbono.setContratoIdcontrato(contrato);
+                abonoListAbono = em.merge(abonoListAbono);
+                if (oldContratoIdcontratoOfAbonoListAbono != null) {
+                    oldContratoIdcontratoOfAbonoListAbono.getAbonoList().remove(abonoListAbono);
+                    oldContratoIdcontratoOfAbonoListAbono = em.merge(oldContratoIdcontratoOfAbonoListAbono);
+                }
+            }
             for (Fotoprenda fotoprendaListFotoprenda : contrato.getFotoprendaList()) {
                 Contrato oldContratoIdcontratoOfFotoprendaListFotoprenda = fotoprendaListFotoprenda.getContratoIdcontrato();
                 fotoprendaListFotoprenda.setContratoIdcontrato(contrato);
@@ -234,41 +253,19 @@ public class ContratoJpaController implements Serializable {
             List<Contrato> contratoList2New = contrato.getContratoList2();
             List<Contrato> contratoList3Old = persistentContrato.getContratoList3();
             List<Contrato> contratoList3New = contrato.getContratoList3();
+            List<Abono> abonoListOld = persistentContrato.getAbonoList();
+            List<Abono> abonoListNew = contrato.getAbonoList();
             List<Fotoprenda> fotoprendaListOld = persistentContrato.getFotoprendaList();
             List<Fotoprenda> fotoprendaListNew = contrato.getFotoprendaList();
             List<Prenda> prendaListOld = persistentContrato.getPrendaList();
             List<Prenda> prendaListNew = contrato.getPrendaList();
             List<String> illegalOrphanMessages = null;
-            for (Contrato contratoListOldContrato : contratoListOld) {
-                if (!contratoListNew.contains(contratoListOldContrato)) {
+            for (Abono abonoListOldAbono : abonoListOld) {
+                if (!abonoListNew.contains(abonoListOldAbono)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Contrato " + contratoListOldContrato + " since its refrendoAnterior field is not nullable.");
-                }
-            }
-            for (Contrato contratoList1OldContrato : contratoList1Old) {
-                if (!contratoList1New.contains(contratoList1OldContrato)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Contrato " + contratoList1OldContrato + " since its refrendoPosterior field is not nullable.");
-                }
-            }
-            for (Contrato contratoList2OldContrato : contratoList2Old) {
-                if (!contratoList2New.contains(contratoList2OldContrato)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Contrato " + contratoList2OldContrato + " since its reempe\u00f1oAnterior field is not nullable.");
-                }
-            }
-            for (Contrato contratoList3OldContrato : contratoList3Old) {
-                if (!contratoList3New.contains(contratoList3OldContrato)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Contrato " + contratoList3OldContrato + " since its reempe\u00f1oPosterior field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Abono " + abonoListOldAbono + " since its contratoIdcontrato field is not nullable.");
                 }
             }
             for (Fotoprenda fotoprendaListOldFotoprenda : fotoprendaListOld) {
@@ -338,6 +335,13 @@ public class ContratoJpaController implements Serializable {
             }
             contratoList3New = attachedContratoList3New;
             contrato.setContratoList3(contratoList3New);
+            List<Abono> attachedAbonoListNew = new ArrayList<Abono>();
+            for (Abono abonoListNewAbonoToAttach : abonoListNew) {
+                abonoListNewAbonoToAttach = em.getReference(abonoListNewAbonoToAttach.getClass(), abonoListNewAbonoToAttach.getIdAbono());
+                attachedAbonoListNew.add(abonoListNewAbonoToAttach);
+            }
+            abonoListNew = attachedAbonoListNew;
+            contrato.setAbonoList(abonoListNew);
             List<Fotoprenda> attachedFotoprendaListNew = new ArrayList<Fotoprenda>();
             for (Fotoprenda fotoprendaListNewFotoprendaToAttach : fotoprendaListNew) {
                 fotoprendaListNewFotoprendaToAttach = em.getReference(fotoprendaListNewFotoprendaToAttach.getClass(), fotoprendaListNewFotoprendaToAttach.getIdfoto());
@@ -393,6 +397,12 @@ public class ContratoJpaController implements Serializable {
                 reempeñoPosteriorNew.getContratoList().add(contrato);
                 reempeñoPosteriorNew = em.merge(reempeñoPosteriorNew);
             }
+            for (Contrato contratoListOldContrato : contratoListOld) {
+                if (!contratoListNew.contains(contratoListOldContrato)) {
+                    contratoListOldContrato.setRefrendoAnterior(null);
+                    contratoListOldContrato = em.merge(contratoListOldContrato);
+                }
+            }
             for (Contrato contratoListNewContrato : contratoListNew) {
                 if (!contratoListOld.contains(contratoListNewContrato)) {
                     Contrato oldRefrendoAnteriorOfContratoListNewContrato = contratoListNewContrato.getRefrendoAnterior();
@@ -402,6 +412,12 @@ public class ContratoJpaController implements Serializable {
                         oldRefrendoAnteriorOfContratoListNewContrato.getContratoList().remove(contratoListNewContrato);
                         oldRefrendoAnteriorOfContratoListNewContrato = em.merge(oldRefrendoAnteriorOfContratoListNewContrato);
                     }
+                }
+            }
+            for (Contrato contratoList1OldContrato : contratoList1Old) {
+                if (!contratoList1New.contains(contratoList1OldContrato)) {
+                    contratoList1OldContrato.setRefrendoPosterior(null);
+                    contratoList1OldContrato = em.merge(contratoList1OldContrato);
                 }
             }
             for (Contrato contratoList1NewContrato : contratoList1New) {
@@ -415,6 +431,12 @@ public class ContratoJpaController implements Serializable {
                     }
                 }
             }
+            for (Contrato contratoList2OldContrato : contratoList2Old) {
+                if (!contratoList2New.contains(contratoList2OldContrato)) {
+                    contratoList2OldContrato.setReempeñoAnterior(null);
+                    contratoList2OldContrato = em.merge(contratoList2OldContrato);
+                }
+            }
             for (Contrato contratoList2NewContrato : contratoList2New) {
                 if (!contratoList2Old.contains(contratoList2NewContrato)) {
                     Contrato oldReempeñoAnteriorOfContratoList2NewContrato = contratoList2NewContrato.getReempeñoAnterior();
@@ -426,6 +448,12 @@ public class ContratoJpaController implements Serializable {
                     }
                 }
             }
+            for (Contrato contratoList3OldContrato : contratoList3Old) {
+                if (!contratoList3New.contains(contratoList3OldContrato)) {
+                    contratoList3OldContrato.setReempeñoPosterior(null);
+                    contratoList3OldContrato = em.merge(contratoList3OldContrato);
+                }
+            }
             for (Contrato contratoList3NewContrato : contratoList3New) {
                 if (!contratoList3Old.contains(contratoList3NewContrato)) {
                     Contrato oldReempeñoPosteriorOfContratoList3NewContrato = contratoList3NewContrato.getReempeñoPosterior();
@@ -434,6 +462,17 @@ public class ContratoJpaController implements Serializable {
                     if (oldReempeñoPosteriorOfContratoList3NewContrato != null && !oldReempeñoPosteriorOfContratoList3NewContrato.equals(contrato)) {
                         oldReempeñoPosteriorOfContratoList3NewContrato.getContratoList3().remove(contratoList3NewContrato);
                         oldReempeñoPosteriorOfContratoList3NewContrato = em.merge(oldReempeñoPosteriorOfContratoList3NewContrato);
+                    }
+                }
+            }
+            for (Abono abonoListNewAbono : abonoListNew) {
+                if (!abonoListOld.contains(abonoListNewAbono)) {
+                    Contrato oldContratoIdcontratoOfAbonoListNewAbono = abonoListNewAbono.getContratoIdcontrato();
+                    abonoListNewAbono.setContratoIdcontrato(contrato);
+                    abonoListNewAbono = em.merge(abonoListNewAbono);
+                    if (oldContratoIdcontratoOfAbonoListNewAbono != null && !oldContratoIdcontratoOfAbonoListNewAbono.equals(contrato)) {
+                        oldContratoIdcontratoOfAbonoListNewAbono.getAbonoList().remove(abonoListNewAbono);
+                        oldContratoIdcontratoOfAbonoListNewAbono = em.merge(oldContratoIdcontratoOfAbonoListNewAbono);
                     }
                 }
             }
@@ -489,33 +528,12 @@ public class ContratoJpaController implements Serializable {
                 throw new NonexistentEntityException("The contrato with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            List<Contrato> contratoListOrphanCheck = contrato.getContratoList();
-            for (Contrato contratoListOrphanCheckContrato : contratoListOrphanCheck) {
+            List<Abono> abonoListOrphanCheck = contrato.getAbonoList();
+            for (Abono abonoListOrphanCheckAbono : abonoListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Contrato (" + contrato + ") cannot be destroyed since the Contrato " + contratoListOrphanCheckContrato + " in its contratoList field has a non-nullable refrendoAnterior field.");
-            }
-            List<Contrato> contratoList1OrphanCheck = contrato.getContratoList1();
-            for (Contrato contratoList1OrphanCheckContrato : contratoList1OrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Contrato (" + contrato + ") cannot be destroyed since the Contrato " + contratoList1OrphanCheckContrato + " in its contratoList1 field has a non-nullable refrendoPosterior field.");
-            }
-            List<Contrato> contratoList2OrphanCheck = contrato.getContratoList2();
-            for (Contrato contratoList2OrphanCheckContrato : contratoList2OrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Contrato (" + contrato + ") cannot be destroyed since the Contrato " + contratoList2OrphanCheckContrato + " in its contratoList2 field has a non-nullable reempe\u00f1oAnterior field.");
-            }
-            List<Contrato> contratoList3OrphanCheck = contrato.getContratoList3();
-            for (Contrato contratoList3OrphanCheckContrato : contratoList3OrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Contrato (" + contrato + ") cannot be destroyed since the Contrato " + contratoList3OrphanCheckContrato + " in its contratoList3 field has a non-nullable reempe\u00f1oPosterior field.");
+                illegalOrphanMessages.add("This Contrato (" + contrato + ") cannot be destroyed since the Abono " + abonoListOrphanCheckAbono + " in its abonoList field has a non-nullable contratoIdcontrato field.");
             }
             List<Fotoprenda> fotoprendaListOrphanCheck = contrato.getFotoprendaList();
             for (Fotoprenda fotoprendaListOrphanCheckFotoprenda : fotoprendaListOrphanCheck) {
@@ -558,6 +576,26 @@ public class ContratoJpaController implements Serializable {
             if (reempeñoPosterior != null) {
                 reempeñoPosterior.getContratoList().remove(contrato);
                 reempeñoPosterior = em.merge(reempeñoPosterior);
+            }
+            List<Contrato> contratoList = contrato.getContratoList();
+            for (Contrato contratoListContrato : contratoList) {
+                contratoListContrato.setRefrendoAnterior(null);
+                contratoListContrato = em.merge(contratoListContrato);
+            }
+            List<Contrato> contratoList1 = contrato.getContratoList1();
+            for (Contrato contratoList1Contrato : contratoList1) {
+                contratoList1Contrato.setRefrendoPosterior(null);
+                contratoList1Contrato = em.merge(contratoList1Contrato);
+            }
+            List<Contrato> contratoList2 = contrato.getContratoList2();
+            for (Contrato contratoList2Contrato : contratoList2) {
+                contratoList2Contrato.setReempeñoAnterior(null);
+                contratoList2Contrato = em.merge(contratoList2Contrato);
+            }
+            List<Contrato> contratoList3 = contrato.getContratoList3();
+            for (Contrato contratoList3Contrato : contratoList3) {
+                contratoList3Contrato.setReempeñoPosterior(null);
+                contratoList3Contrato = em.merge(contratoList3Contrato);
             }
             em.remove(contrato);
             em.getTransaction().commit();

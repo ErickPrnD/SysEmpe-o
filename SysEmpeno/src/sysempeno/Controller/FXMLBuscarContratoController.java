@@ -5,10 +5,16 @@
  */
 package sysempeno.Controller;
 
-import Entities.Contrato;
-import Entities.Prenda;
+import entities.Contrato;
+import entities.Prenda;
+import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,7 +22,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -24,8 +33,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import jpa.ContratoJpaController;
 import sysempeno.model.Alerta;
+import sysempeno.model.Context;
 
 /**
  * FXML Controller class
@@ -126,28 +138,34 @@ public class FXMLBuscarContratoController implements Initializable {
     private TextField txfDesempeño;
     @FXML
     private TextField txfAcumulado;
-    Alerta alerta=new Alerta();
+    Alerta alerta = new Alerta();
+    boolean contratoLleno=false;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        txfBusqueda.textProperty().addListener(new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observable, String oldValue,
-                            String newValue) {
-                        if (!newValue.matches("\\d*")) {
-                            txfBusqueda.setText(newValue.replaceAll("[^\\d]", ""));
-                        }
-                    }
-                });
         
+        ContratoJpaController contratojpa = new ContratoJpaController();
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        txfBusqueda.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                    String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    txfBusqueda.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
         btnBuscar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                ContratoJpaController contratojpa=new ContratoJpaController();
-                Contrato contrato=contratojpa.findContrato(Integer.parseInt(txfBusqueda.getText()));
-                if(contrato==null){
-                    
+
+                Contrato contrato = contratojpa.findContrato(Integer.parseInt(txfBusqueda.getText()));
+                if (contrato == null) {
+                    contratoLleno=false;
                     alerta.alertaInfo("Contrato inexistente", null, "El numero proporcionado no corresponde a un contrato existente");
-                }else{
+                } else {
+                    contratoLleno=true;
+                    Context.getInstance().setContrato(contrato);
                     desplegarInfoContrato(contrato);
                 }
             }
@@ -156,42 +174,121 @@ public class FXMLBuscarContratoController implements Initializable {
                 lblNumeroContrato.setText(contrato.getIdcontrato().toString());
                 txfCliente.setText(contrato.getClienteIdcliente().toString());
                 txfNumeroIdentificacion.setText(contrato.getClienteIdcliente().getNumeroIdentificacion());
-                //txfPrestamo.setText(contrato.getTotal().toString()); 
+//                txfPrestamo.setText(contrato.getTotal().toString()); 
                 txfDireccion.setText(contrato.getClienteIdcliente().getDireccion());
-                txfContratoP.setText(contrato.getRefrendoAnterior().getIdcontrato().toString());
-                txfContratoS.setText(contrato.getRefrendoPosterior().getIdcontrato().toString());
-                txfReempeñoO.setText(contrato.getReempeñoAnterior().getIdcontrato().toString());
-                txfReempeñoS.setText(contrato.getReempeñoPosterior().getIdcontrato().toString());
+                if (contrato.getFechaLimite().after(Calendar.getInstance().getTime())) {
+                    if (contrato.getFechaComercializacion().after(Calendar.getInstance().getTime())) {
+                        txfEstatus.setText("Comercializado");
+                    } else {
+                        txfEstatus.setText("Vencido");
+                    }
+                } else {
+                    txfEstatus.setText("Activo");
+                }
+                if (contrato.getRefrendoAnterior() != null) {
+                    txfContratoP.setText(contrato.getRefrendoAnterior().getIdcontrato().toString());
+                }
+                if (contrato.getRefrendoPosterior() != null) {
+                    txfContratoS.setText(contrato.getRefrendoPosterior().getIdcontrato().toString());
+                }
+                if (contrato.getReempeñoAnterior() != null) {
+                    txfReempeñoO.setText(contrato.getReempeñoAnterior().getIdcontrato().toString());
+                }
+                if (contrato.getReempeñoPosterior() != null) {
+                    txfReempeñoS.setText(contrato.getReempeñoPosterior().getIdcontrato().toString());
+                }
+
                 txaObservacionesCliente.setText(contrato.getObservacionesCliente());
                 txaObservacionesEmp.setText(contrato.getObservacionesEmpeño());
-                ObservableList<Prenda> listaPrendas=FXCollections.observableArrayList(contrato.getPrendaList());
+                ObservableList<Prenda> listaPrendas = FXCollections.observableArrayList(contrato.getPrendaList());
                 lsvPrendas.setItems(listaPrendas);
                 txfNumeroBolsa.setText(Integer.toString(contrato.getNumBolsa()));
-                txfFechaLimite.setText(contrato.getFechaLimite().toString());
-                txfFechaEspera.setText(contrato.getFechaEspera().toString());
-                txfFechaComercializacion.setText(contrato.getFechaComercializacion().toString());
+                txfFechaLimite.setText(df.format(contrato.getFechaLimite()));
+                txfFechaEspera.setText(df.format(contrato.getFechaEspera()));
+                txfFechaComercializacion.setText(df.format(contrato.getFechaComercializacion()));
                 txfDesempeño.setText(contrato.getDesempeña());
                 txfFotos.setText(Integer.toString(contrato.getFotoprendaList().size()));
                 txfPrendas.setText(Integer.toString(contrato.getPrendaList().size()));
                 txfAbono.setText(Double.toString(contrato.getAbono()));
-                //txfPrestamoOriginal.setText(contrato.getTotal().toString());
+                Double total = 0d;
+                for (int i = 0; i < contrato.getPrendaList().size(); i++) {
+                    total = total + contrato.getPrendaList().get(i).getPrestamo();
+                }
+                txfPrestamoOriginal.setText(Double.toString(total));
                 txfCotitular.setText(contrato.getCotitular());
                 txfIdCotitular.setText(contrato.getIdentificacionCotitular());
                 txfNombreDesempeño.setText(contrato.getDesempeña());
                 txfCaptura.setText(contrato.getPrendaList().get(0).getRevisa().toString());
                 txfAutoriza.setText(contrato.getPrendaList().get(0).getAutoriza().toString());
-                //txfNumeroRefrendos.setText(contrato.getNumBolsa());
                 txfDiasRefrendar.setText(Integer.toString(contrato.getDiasRefrendo()));
                 txfDesempeñar.setText(Integer.toString(contrato.getDiasDesempeño()));
-                //txfAcumulado.setText("");
+                txfAcumulado.setText(Double.toString(contrato.getAcumulado()));
                 txfIdDesempeño.setText(contrato.getIdentificacionDesempeño());
                 txfNumeroIdDesempeño.setText(contrato.getNumIdentificacionDesempeño());
-                txfFechaComercializado.setText(contrato.getFechaComercializacion().toString());
-                
+                txfFechaComercializado.setText(df.format(contrato.getFechaComercializacion()));
+                if (contrato.getDesempeña() != null) {
+                    txfDesempeño.setText(contrato.getDesempeña());
+                }
+                if (contrato.getNombreDesempeño() != null) {
+                    txfNombreDesempeño.setText(contrato.getNombreDesempeño());
+                }
+                if (contrato.getNumIdentificacionDesempeño() != null) {
+                    txfNumeroIdDesempeño.setText(contrato.getNumIdentificacionDesempeño());
+                }
+                if (contrato.getIdentificacionDesempeño() != null) {
+                    txfIdDesempeño.setText(contrato.getIdentificacionDesempeño());
+                }
+
+                tbcPrenda.setCellValueFactory(new PropertyValueFactory<Prenda, String>("categoria_idcategoria"));
+                tbcAvaluo.setCellValueFactory(new PropertyValueFactory<Prenda, Double>("avaluo"));
+                tbcDescripcion.setCellValueFactory(new PropertyValueFactory<Prenda, String>("descripcion"));
+                tbcPrestamo.setCellValueFactory(new PropertyValueFactory<Prenda, Double>("prestamo"));
+                ObservableList<Prenda> infoPrendas = FXCollections.observableArrayList(contrato.getPrendaList());
+                tbvPrendas.setItems(infoPrendas);
             }
         });
-    }    
-    
-    
-    
+
+        btnRefrendar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    if(contratoLleno){
+                    Stage stage = (Stage) btnRefrendar.getScene().getWindow();
+                    stage.close();
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sysempeno/view/FXMLRefrendarContrato.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+                    }else{
+                        alerta.alertaInfo("Sin contrato", null, "Debes seleccionar un contrato antes de poder refrendar");
+                    }
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLBuscarContratoController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
+        btnAumentarEspera.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    if(contratoLleno){
+                    Stage stage = (Stage) btnAumentarEspera.getScene().getWindow();
+                    stage.close();
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sysempeno/view/FXMLExtenderTiempoEspera.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+                    }else{
+                        alerta.alertaInfo("Sin contrato", null, "Debes seleccionar un contrato antes de poder aumentar el tiempo de espera");
+                    }
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLBuscarContratoController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+
 }

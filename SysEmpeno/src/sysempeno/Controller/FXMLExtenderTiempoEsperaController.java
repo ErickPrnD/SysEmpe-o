@@ -39,27 +39,8 @@ public class FXMLExtenderTiempoEsperaController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
-    @Override
-    public void updateItem(LocalDate item, boolean empty) {
-
-        super.updateItem(item, empty);
-        
-        this.setDisable(false);
-        this.setBackground(null);
-        this.setTextFill(Color.BLACK);
-        
-        // deshabilitar las fechas pasadas
-        if (item.isBefore(LocalDate.now())) {
-            this.setDisable(true);
-        }
-        
-        // deshabilitar las fechas futuras
-        if (item.isAfter(LocalDate.now())) {
-            this.setDisable(true);
-        }
-    }    
     
-};
+    
+
                 }
 }

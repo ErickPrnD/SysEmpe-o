@@ -10,13 +10,12 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Concepto;
-import Entities.Movimiento;
-import Entities.Mueve;
+import entities.Concepto;
+import entities.Movimiento;
+import entities.Mueve;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import jpa.exceptions.NonexistentEntityException;
 
 /**
@@ -25,8 +24,8 @@ import jpa.exceptions.NonexistentEntityException;
  */
 public class MovimientoJpaController implements Serializable {
 
-    public MovimientoJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("SysEmpenoPU");
+    public MovimientoJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 

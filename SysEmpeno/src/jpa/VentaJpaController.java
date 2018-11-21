@@ -10,14 +10,13 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Cliente;
-import Entities.Articulo;
-import Entities.Venta;
+import entities.Cliente;
+import entities.Articulo;
+import entities.Venta;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import jpa.exceptions.NonexistentEntityException;
 
 /**
@@ -26,8 +25,8 @@ import jpa.exceptions.NonexistentEntityException;
  */
 public class VentaJpaController implements Serializable {
 
-    public VentaJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("SysEmpenoPU");
+    public VentaJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 

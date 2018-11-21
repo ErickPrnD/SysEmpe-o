@@ -10,12 +10,11 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Categoria;
-import Entities.Subcategoria;
+import entities.Categoria;
+import entities.Subcategoria;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import jpa.exceptions.NonexistentEntityException;
 
 /**
@@ -24,8 +23,8 @@ import jpa.exceptions.NonexistentEntityException;
  */
 public class SubcategoriaJpaController implements Serializable {
 
-    public SubcategoriaJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("SysEmpenoPU");
+    public SubcategoriaJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 

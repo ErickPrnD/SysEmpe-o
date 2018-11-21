@@ -5,22 +5,22 @@
  */
 package jpa;
 
-import Entities.Cliente;
+import entities.Cliente;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Institucionemite;
-import Entities.Municipio;
-import Entities.Ocupacion;
-import Entities.Pais;
-import Entities.Tipoidentificacion;
-import Entities.Venta;
+import entities.Institucionemite;
+import entities.Municipio;
+import entities.Ocupacion;
+import entities.Pais;
+import entities.Tipoidentificacion;
+import entities.Venta;
 import java.util.ArrayList;
 import java.util.List;
-import Entities.Contrato;
-import Entities.Fotocliente;
+import entities.Contrato;
+import entities.Fotocliente;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

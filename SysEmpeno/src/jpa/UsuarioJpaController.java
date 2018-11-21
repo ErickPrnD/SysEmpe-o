@@ -10,15 +10,14 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Rol;
-import Entities.Mueve;
+import entities.Rol;
+import entities.Mueve;
 import java.util.ArrayList;
 import java.util.List;
-import Entities.Prenda;
-import Entities.Usuario;
+import entities.Prenda;
+import entities.Usuario;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
 
@@ -28,8 +27,8 @@ import jpa.exceptions.NonexistentEntityException;
  */
 public class UsuarioJpaController implements Serializable {
 
-    public UsuarioJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("SysEmpenoPU");
+    public UsuarioJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 

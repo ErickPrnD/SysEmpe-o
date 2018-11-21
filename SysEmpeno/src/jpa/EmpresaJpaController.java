@@ -5,17 +5,16 @@
  */
 package jpa;
 
-import Entities.Empresa;
+import entities.Empresa;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Municipio;
+import entities.Municipio;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import jpa.exceptions.NonexistentEntityException;
 
 /**
@@ -24,8 +23,8 @@ import jpa.exceptions.NonexistentEntityException;
  */
 public class EmpresaJpaController implements Serializable {
 
-    public EmpresaJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("SysEmpenoPU");
+    public EmpresaJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 

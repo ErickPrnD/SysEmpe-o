@@ -5,14 +5,13 @@
  */
 package jpa;
 
-import Entities.Corte;
+import entities.Corte;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import jpa.exceptions.NonexistentEntityException;
@@ -23,8 +22,8 @@ import jpa.exceptions.NonexistentEntityException;
  */
 public class CorteJpaController implements Serializable {
 
-    public CorteJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("SysEmpenoPU");
+    public CorteJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 

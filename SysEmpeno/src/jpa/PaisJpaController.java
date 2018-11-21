@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package jpa;
 
 import java.io.Serializable;
@@ -10,14 +11,13 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Estado;
+import entities.Estado;
 import java.util.ArrayList;
 import java.util.List;
-import Entities.Cliente;
-import Entities.Pais;
+import entities.Cliente;
+import entities.Pais;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
 
@@ -27,8 +27,8 @@ import jpa.exceptions.NonexistentEntityException;
  */
 public class PaisJpaController implements Serializable {
 
-    public PaisJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("SysEmpenoPU");
+    public PaisJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
@@ -254,5 +254,5 @@ public class PaisJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

@@ -10,15 +10,14 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Estado;
-import Entities.Cliente;
+import entities.Estado;
+import entities.Cliente;
 import java.util.ArrayList;
 import java.util.List;
-import Entities.Empresa;
-import Entities.Municipio;
+import entities.Empresa;
+import entities.Municipio;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
 
@@ -28,8 +27,8 @@ import jpa.exceptions.NonexistentEntityException;
  */
 public class MunicipioJpaController implements Serializable {
 
-    public MunicipioJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("SysEmpenoPU");
+    public MunicipioJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 

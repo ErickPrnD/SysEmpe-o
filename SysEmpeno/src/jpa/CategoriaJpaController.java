@@ -5,16 +5,16 @@
  */
 package jpa;
 
-import Entities.Categoria;
+import entities.Categoria;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Subcategoria;
+import entities.Subcategoria;
 import java.util.ArrayList;
 import java.util.List;
-import Entities.Prenda;
+import entities.Prenda;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
